@@ -1,0 +1,98 @@
+
+# ==========================================
+# Unity Generated Files
+# ==========================================
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+MemoryCaptures/
+Recordings/
+
+# ==========================================
+# Unity Asset Store & Plastic SCM
+# ==========================================
+
+/[Aa]ssets/AssetStoreTools*
+/[Aa]ssets/Plugins/PlasticSCM*
+
+# ==========================================
+# Unity Build Files
+# ==========================================
+
+*.apk
+*.aab
+*.app
+*.unitypackage
+
+# ==========================================
+# Unity Addressables
+# ==========================================
+
+/[Aa]ssets/StreamingAssets/aa.meta
+/[Aa]ssets/StreamingAssets/aa/*
+
+# ==========================================
+# IDE & Editor Files
+# ==========================================
+
+.vs/
+.vscode/
+.idea/
+.gradle/
+.consulo/
+
+*.csproj
+*.unityproj
+*.sln
+*.slnx
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# ==========================================
+# OS Generated Files
+# ==========================================
+
+.DS_Store
+.DS_Store?
+Thumbs.db
+Desktop.ini
+
+# ==========================================
+# Logs & Crash Reports
+# ==========================================
+
+sysinfo.txt
+crashlytics-build.properties
+*.log
+
+# ==========================================
+# Temporary & Backup Files
+# ==========================================
+
+*.bak
+*.swp
+*~
+~UnityDirMonSyncFile~*
+
+# ==========================================
+# Private Files
+# ==========================================
+
+*.private
+*.private.meta
+*.private.[0-9]*
+*.private.[0-9]*.meta
