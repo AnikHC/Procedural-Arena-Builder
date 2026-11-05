@@ -325,7 +325,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.14509805, g: 0.07450981, b: 0.10196079, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -411,10 +411,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimpleRandomWalkDungeonGenerator
   startingPosition: {x: 0, y: 0}
-  walkLength: 1
+  tilemapVisualizer: {fileID: 79216116}
+  walkLength: 10
   iterations: 10
   startRandomlyEachIteration: 1
-  tilemapVisualizer: {fileID: 79216116}
 --- !u!4 &611350137
 Transform:
   m_ObjectHideFlags: 0
@@ -966,7 +966,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 611350136}
         m_TargetAssemblyTypeName: SimpleRandomWalkDungeonGenerator, Assembly-CSharp
-        m_MethodName: StartProceduralGeneration
+        m_MethodName: GenerateDungeon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
