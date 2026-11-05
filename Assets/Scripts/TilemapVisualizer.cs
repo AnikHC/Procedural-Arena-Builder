@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -8,6 +9,8 @@ public class TilemapVisualizer : MonoBehaviour
 {
     [SerializeField] private Tilemap floorTileMap;
     [SerializeField] private TileBase floorTile;
+    [SerializeField] private Tilemap wallTileMap;
+    [SerializeField] private TileBase wallTile;
 
     public void GenerateFloorTiles(IEnumerable <Vector2Int> floorPositions)
     {
@@ -27,8 +30,14 @@ public class TilemapVisualizer : MonoBehaviour
         var tilePosition = tileMap.WorldToCell((Vector3Int)position);
         tileMap.SetTile(tilePosition,tile);
     }
+    public void PaintWallTile(IEnumerable<Vector2Int> wallPosition)
+    {
+        PaintTiles(wallPosition,wallTileMap,wallTile);
+    }
     public void ClearTiles()
     {
         floorTileMap.ClearAllTiles();
+        wallTileMap.ClearAllTiles();
     }
+
 }

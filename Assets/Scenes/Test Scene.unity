@@ -412,9 +412,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SimpleRandomWalkDungeonGenerator
   startingPosition: {x: 0, y: 0}
   tilemapVisualizer: {fileID: 79216116}
-  walkLength: 10
+  walkLength: 23
   iterations: 10
-  startRandomlyEachIteration: 1
+  startRandomlyEachIteration: 0
 --- !u!4 &611350137
 Transform:
   m_ObjectHideFlags: 0

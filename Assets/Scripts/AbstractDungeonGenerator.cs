@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public abstract class AbstractDungeonGenerator : MonoBehaviour
 {
@@ -8,8 +9,11 @@ public abstract class AbstractDungeonGenerator : MonoBehaviour
 
     public void GenerateDungeon()
     {
-        tilemapVisualizer.ClearTiles();
         RunProceduralGeneration(); 
+    }
+    public void ClearTile()
+    {
+        tilemapVisualizer.ClearTiles();
     }
 
     protected abstract void RunProceduralGeneration();
