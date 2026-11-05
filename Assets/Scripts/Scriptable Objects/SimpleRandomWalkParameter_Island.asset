@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SimpleRandomWalkParameter_Island
   m_EditorClassIdentifier: Assembly-CSharp::SimpleRandomWalkParameter
   iterations: 10
-  walkLength: 10
+  walkLength: 25
   startRandomlyEachIteration: 0
