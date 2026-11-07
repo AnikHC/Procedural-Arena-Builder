@@ -93,7 +93,6 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
     private Vector2Int FindClossestRoom(List<Vector2Int> roomPositions, Vector2Int currentRoomPosition)
     {
-        Debug.Log("Searching nearby rooms");
         Vector2Int closestRoom = new();
         float distance = float.MaxValue;
         foreach (var roomPosition in roomPositions)
@@ -106,7 +105,6 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     }
     private HashSet<Vector2Int> ConnectRooms(Vector2Int closestRoomPosition, Vector2Int currentRoomPosition)
     {
-        Debug.Log("Connecting Rooms");
         HashSet<Vector2Int> floorPositions = new();
         var floorPosition = currentRoomPosition;
         

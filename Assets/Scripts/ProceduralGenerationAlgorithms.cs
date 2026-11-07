@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public static class ProceduralGenerationAlgorithms
@@ -117,6 +118,17 @@ public static class ProceduralGenerationAlgorithms
             Vector2Int.down,
             Vector2Int.left
         };  
+        public static List<Vector2Int> cardinalAndDiagonalDirection = new()
+        {
+            Vector2Int.up,
+            Vector2Int.right,
+            Vector2Int.down,
+            Vector2Int.left,
+            new Vector2Int(1,1),
+            new Vector2Int(1,-1),
+            new Vector2Int(-1,1),
+            new Vector2Int(-1,-1)
+        };
 
         public static Vector2Int GetRandomCardinalDirection()
         {

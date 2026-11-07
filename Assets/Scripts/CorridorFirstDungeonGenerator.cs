@@ -40,7 +40,6 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
             }
             if(neighbours==1) deadEnds.Add(floorPosition);   
         }
-        Debug.Log(deadEnds.Count);
         return deadEnds;
     }
 
