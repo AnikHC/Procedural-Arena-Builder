@@ -15,36 +15,49 @@ public static class WallGenerator
         foreach(var wallPosition in basicWallPositions)
         {
             //Walls in between
-            if(CheckFloorNeighbourCount(floorPositions,wallPosition)>=3||CheckFloorNeighbourCount(basicWallPositions,wallPosition)>=3) 
+            if (CheckFloorNeighbourCount(floorPositions, wallPosition) >= 3 || CheckFloorNeighbourCount(basicWallPositions, wallPosition) >= 3)
+            { 
                 tilemapVisualizer.PaintWallTile(wallPosition,tilemapVisualizer.straightLeftRight_Up);
+                ToolManagerScript.instance.straightLeftRight_Up.Add(wallPosition);
+            }
 
             //corner 1
-            else if(floorPositions.Contains(wallPosition+Vector2Int.up)&&floorPositions.Contains(wallPosition+Vector2Int.right))
+            else if(floorPositions.Contains(wallPosition+Vector2Int.up)&&floorPositions.Contains(wallPosition+Vector2Int.right)){
                 tilemapVisualizer.PaintWallTile(wallPosition,tilemapVisualizer.bentLeft);
-            else if(floorPositions.Contains(wallPosition+Vector2Int.up)&&floorPositions.Contains(wallPosition+Vector2Int.left))
+                ToolManagerScript.instance.bentLeft.Add(wallPosition);}
+            else if(floorPositions.Contains(wallPosition+Vector2Int.up)&&floorPositions.Contains(wallPosition+Vector2Int.left)){
                 tilemapVisualizer.PaintWallTile(wallPosition,tilemapVisualizer.bentRight);
+                ToolManagerScript.instance.bentRight.Add(wallPosition);}
 
             //corner 2
-            else if(basicWallPositions.Contains(wallPosition+Vector2Int.left)&&basicWallPositions.Contains(wallPosition+Vector2Int.down))
+            else if(basicWallPositions.Contains(wallPosition+Vector2Int.left)&&basicWallPositions.Contains(wallPosition+Vector2Int.down)){
                 tilemapVisualizer.PaintWallTile(wallPosition,tilemapVisualizer.straightUpDown_Right);
-            else if(basicWallPositions.Contains(wallPosition+Vector2Int.right)&&basicWallPositions.Contains(wallPosition+Vector2Int.down))
+                ToolManagerScript.instance.straightUpDown_Right.Add(wallPosition);}
+            else if(basicWallPositions.Contains(wallPosition+Vector2Int.right)&&basicWallPositions.Contains(wallPosition+Vector2Int.down)){
                 tilemapVisualizer.PaintWallTile(wallPosition,tilemapVisualizer.straightUpDown_Left);
+                ToolManagerScript.instance.straightUpDown_Left.Add(wallPosition);}
             
             //straight Walls
-            else if(floorPositions.Contains(wallPosition+Vector2Int.up))
+            else if(floorPositions.Contains(wallPosition+Vector2Int.up)){
                 tilemapVisualizer.PaintWallTile(wallPosition,tilemapVisualizer.straightLeftRight_Down);
-            else if(floorPositions.Contains(wallPosition+Vector2Int.down))
+                ToolManagerScript.instance.straightLeftRight_Down.Add(wallPosition);}
+            else if(floorPositions.Contains(wallPosition+Vector2Int.down)){
                 tilemapVisualizer.PaintWallTile(wallPosition,tilemapVisualizer.straightLeftRight_Up);
-            else if(floorPositions.Contains(wallPosition+Vector2Int.right))
+                ToolManagerScript.instance.straightLeftRight_Up.Add(wallPosition);}
+            else if(floorPositions.Contains(wallPosition+Vector2Int.right)){
                 tilemapVisualizer.PaintWallTile(wallPosition,tilemapVisualizer.straightUpDown_Left);
-            else if(floorPositions.Contains(wallPosition+Vector2Int.left))
+                ToolManagerScript.instance.straightUpDown_Left.Add(wallPosition);}
+            else if(floorPositions.Contains(wallPosition+Vector2Int.left)){
                 tilemapVisualizer.PaintWallTile(wallPosition,tilemapVisualizer.straightUpDown_Right);
+                ToolManagerScript.instance.straightUpDown_Right.Add(wallPosition);}
             
             //corner3
-            else if(basicWallPositions.Contains(wallPosition + Vector2Int.up)&&basicWallPositions.Contains(wallPosition+Vector2Int.left))
+            else if(basicWallPositions.Contains(wallPosition + Vector2Int.up)&&basicWallPositions.Contains(wallPosition+Vector2Int.left)){
                 tilemapVisualizer.PaintWallTile(wallPosition,tilemapVisualizer.downRightCorner);
-            else if(basicWallPositions.Contains(wallPosition + Vector2Int.up)&&basicWallPositions.Contains(wallPosition+Vector2Int.right))
+                ToolManagerScript.instance.downRightCorner.Add(wallPosition);}
+            else if(basicWallPositions.Contains(wallPosition + Vector2Int.up)&&basicWallPositions.Contains(wallPosition+Vector2Int.right)){
                 tilemapVisualizer.PaintWallTile(wallPosition,tilemapVisualizer.downLeftCorner);
+                ToolManagerScript.instance.downLeftCorner.Add(wallPosition);}
             
             
         } 

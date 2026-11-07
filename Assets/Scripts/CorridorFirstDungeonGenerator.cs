@@ -8,13 +8,28 @@ using Random = UnityEngine.Random;
 
 public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 {
+    #region Varialbles
     [SerializeField] private int corridorLength = 10, corridorCount = 5;
     [SerializeField] [Range(0f,1f)] float roomPercentage;
+    #endregion
+
+    #region Overrides
     protected override void RunProceduralGeneration()
     {
-        tilemapVisualizer.ClearTiles();
+        StartGenerations();
+    }
 
-        HashSet<Vector2Int> floorPositions = new();
+    protected override void RunWallGenerations()
+    {
+        WallGenerator.CreateWalls(floorPositions,tilemapVisualizer);
+    }
+    #endregion
+
+    #region Generation 
+    private void StartGenerations()
+    {
+        floorPositions = new();
+        tilemapVisualizer.ClearTiles();
         HashSet<Vector2Int> potentialRoomPositions = new();
         
         GenerateCorridor(floorPositions,potentialRoomPositions);
@@ -22,11 +37,25 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         HashSet<Vector2Int> roomPositions = CreateRoomsAtCorridor(potentialRoomPositions,deadEnds);
         
         floorPositions.UnionWith(roomPositions);
+        SaveFloorPositions(floorPositions);
 
         tilemapVisualizer.GenerateFloorTiles(floorPositions);
-        WallGenerator.CreateWalls(floorPositions,tilemapVisualizer);
+        if(generateWallAutomatically) RunWallGenerations();
+        CenterCamera(floorPositions);
     }
+    private void GenerateCorridor(HashSet<Vector2Int> floorPositions, HashSet<Vector2Int> potentialRoomPositions)
+    {
+        Vector2Int currentPosition = startingPosition;
+        potentialRoomPositions.Add(startingPosition);
 
+        for (int i = 0; i < corridorCount; i++)
+        {
+            var corridor = ProceduralGenerationAlgorithms.CorridorGenerator(currentPosition,corridorLength);
+            floorPositions.UnionWith(corridor);
+            currentPosition = corridor[corridor.Count-1];
+            potentialRoomPositions.Add(currentPosition);
+        }
+    }
     private List<Vector2Int> FindCorridorDeadEnds(HashSet<Vector2Int> floorPositions)
     {
         List<Vector2Int> deadEnds = new();
@@ -42,7 +71,6 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         }
         return deadEnds;
     }
-
     private HashSet<Vector2Int> CreateRoomsAtCorridor(HashSet<Vector2Int> potentialRoomPositions, List<Vector2Int> deadEnds)
     {
         HashSet<Vector2Int> roomPositions = new();
@@ -62,18 +90,5 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         }
         return roomPositions;
     }
-
-    private void GenerateCorridor(HashSet<Vector2Int> floorPositions, HashSet<Vector2Int> potentialRoomPositions)
-    {
-        Vector2Int currentPosition = startingPosition;
-        potentialRoomPositions.Add(startingPosition);
-
-        for (int i = 0; i < corridorCount; i++)
-        {
-            var corridor = ProceduralGenerationAlgorithms.CorridorGenerator(currentPosition,corridorLength);
-            floorPositions.UnionWith(corridor);
-            currentPosition = corridor[corridor.Count-1];
-            potentialRoomPositions.Add(currentPosition);
-        }
-    }
+    #endregion
 }

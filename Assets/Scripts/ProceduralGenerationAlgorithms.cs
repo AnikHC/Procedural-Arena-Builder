@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class ProceduralGenerationAlgorithms
 {
+    #region Simple Random Walk Algorithm
     public static HashSet<Vector2Int> SimpleRandomWalkGenerator(Vector2Int startPostion, int walkLength)
     {
         HashSet<Vector2Int> room = new()
@@ -37,7 +38,9 @@ public static class ProceduralGenerationAlgorithms
         }
         return corridor;
     }
+    #endregion
 
+    #region BSP Algorithm
     public static List<BoundsInt> BinarySpacePartitioning(int minWidth, int minHeight, BoundsInt spaceToSplit)
     {
         Queue<BoundsInt> roomsQueue = new();
@@ -83,7 +86,6 @@ public static class ProceduralGenerationAlgorithms
         }
         return roomsList;
     }
-
     private static void SplitRoomVertically(Queue<BoundsInt> roomsQueue, int minWidth, BoundsInt room)
     {
         int xSplit = Random.Range(1,room.size.x);
@@ -95,7 +97,6 @@ public static class ProceduralGenerationAlgorithms
         roomsQueue.Enqueue(room1);
         roomsQueue.Enqueue(room2);
     }
-
     private static void SplitRoomHorizontally(Queue<BoundsInt> roomsQueue, int minWidth, BoundsInt room)
     {
         int ySplit = Random.Range(1,room.size.y);
@@ -107,9 +108,11 @@ public static class ProceduralGenerationAlgorithms
         roomsQueue.Enqueue(room1);
         roomsQueue.Enqueue(room2);
     }
+    #endregion
 }
 
-    public static class Direction2D
+#region Helper Direction Class
+public static class Direction2D
     {
         public static List<Vector2Int> cardinalDirection = new()
         {
@@ -135,3 +138,4 @@ public static class ProceduralGenerationAlgorithms
             return cardinalDirection[Random.Range(0,cardinalDirection.Count)];
         } 
     }
+#endregion

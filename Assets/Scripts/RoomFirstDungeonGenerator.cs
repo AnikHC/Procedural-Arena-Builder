@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 
 public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 {
+    #region Variables
     [SerializeField]
     private int dungeonWidth, dungeonHeight;
     [SerializeField]
@@ -17,17 +18,26 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     [SerializeField]
     [Range(0,10)]
     private int offset;
-
+    #endregion
+    
+    #region Overrides
     protected override void RunProceduralGeneration()
     {
         CreateRooms();
     }
-
+    protected override void RunWallGenerations()
+    {
+        WallGenerator.CreateWalls(floorPositions,tilemapVisualizer);
+    }
+    #endregion
+    
+    #region Generation
     private void CreateRooms()
     {
+        floorPositions = new();
+        ClearTile();
         BoundsInt dungeonSize = new((Vector3Int)startingPosition,new Vector3Int(dungeonWidth,dungeonHeight,0));
         List<BoundsInt> roomList = ProceduralGenerationAlgorithms.BinarySpacePartitioning(minRoomWidth,minRoomHeight,dungeonSize);
-        HashSet<Vector2Int> floorPositions = new();
 
         HashSet<Vector2Int> rooms = new();
         if (!useRandomWalkForRoomGenerations)
@@ -42,10 +52,28 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
         HashSet<Vector2Int> corridors = CreateCorridors(roomList);
         floorPositions.UnionWith(corridors);
+        SaveFloorPositions(floorPositions);
 
-        ClearTile();
         tilemapVisualizer.GenerateFloorTiles(floorPositions);
-        WallGenerator.CreateWalls(floorPositions,tilemapVisualizer);
+        CenterCamera(floorPositions);
+        if(generateWallAutomatically) RunWallGenerations();
+    }
+    private HashSet<Vector2Int> UseBSP(List<BoundsInt> roomList)
+    {
+        HashSet<Vector2Int> floorPositions = new();
+     
+        foreach(var room in roomList)
+        {
+            for (int col = offset; col < room.size.x; col++)
+            {
+                for (int row = offset; row < room.size.y; row++)
+                {
+                    Vector2Int position = (Vector2Int)room.min + new Vector2Int(col,row);
+                    floorPositions.Add(position);
+                }
+            }
+        }
+        return floorPositions;
     }
 
     private HashSet<Vector2Int> CreateRoomsWithRandomWalk(List<BoundsInt> roomList)
@@ -174,23 +202,5 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
         return floorPositions;
     }
-
-
-    private HashSet<Vector2Int> UseBSP(List<BoundsInt> roomList)
-    {
-        HashSet<Vector2Int> floorPositions = new();
-     
-        foreach(var room in roomList)
-        {
-            for (int col = offset; col < room.size.x; col++)
-            {
-                for (int row = offset; row < room.size.y; row++)
-                {
-                    Vector2Int position = (Vector2Int)room.min + new Vector2Int(col,row);
-                    floorPositions.Add(position);
-                }
-            }
-        }
-        return floorPositions;
-    }
+    #endregion
 }
