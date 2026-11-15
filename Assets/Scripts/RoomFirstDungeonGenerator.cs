@@ -83,7 +83,7 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         {
             var roomBounds = roomList[i];
             var roomPosition = (Vector2Int)Vector3Int.RoundToInt(roomBounds.center);
-            var room = RunRandomWalk(roomPosition);
+            var room = RunRandomWalk(roomPosition,iterations,walkLength,startRandomlyEachIteration);
             foreach (var position in room)
             {
                 if(position.x>=roomBounds.xMin+offset && position.x <= roomBounds.xMax-offset && 
@@ -201,6 +201,21 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         }
 
         return floorPositions;
+    }
+    internal void StartGenerationFromButton(int i, int wl, bool srei, bool gwa, 
+        int dw, int dh, int mrw, int mrh, bool urwfrg, int o)
+    {
+        iterations = i;
+        walkLength = wl;
+        startRandomlyEachIteration = srei;
+        generateWallAutomatically = gwa;
+        dungeonWidth = dw;
+        dungeonHeight = dh;
+        minRoomWidth = mrw;
+        minRoomHeight = mrh;
+        useRandomWalkForRoomGenerations = urwfrg;
+        offset = o;
+        CreateRooms();
     }
     #endregion
 }

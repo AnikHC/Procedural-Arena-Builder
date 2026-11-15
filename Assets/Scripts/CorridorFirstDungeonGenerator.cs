@@ -85,10 +85,24 @@ public class CorridorFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         potentialRoomPositionsList.InsertRange(0,deadEnds);
         for (int i = 0; i < roomCount; i++)
         {
-            HashSet<Vector2Int> roomPosition = RunRandomWalk(potentialRoomPositionsList[i]);
+            HashSet<Vector2Int> roomPosition = RunRandomWalk(potentialRoomPositionsList[i],iterations,walkLength,startRandomlyEachIteration);
             roomPositions.UnionWith(roomPosition);
         }
         return roomPositions;
+    }
+
+    internal void StartGenerationFromButton(int i, int wl, bool srei, bool gwa, 
+        int cl, int cc, int rp)
+    {
+        iterations = i;
+        walkLength = wl;
+        startRandomlyEachIteration = srei;
+        generateWallAutomatically = gwa;
+        corridorLength = cl;
+        corridorCount = cc;
+        roomPercentage = rp/100f;
+        Debug.Log(roomPercentage);
+        StartGenerations();
     }
     #endregion
 }

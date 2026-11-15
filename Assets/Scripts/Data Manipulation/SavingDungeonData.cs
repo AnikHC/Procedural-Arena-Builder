@@ -21,7 +21,7 @@ public class SavingDungeonData : MonoBehaviour
     private DungeonData dungeonData = new();
     [SerializeField] private ToolManagerScript toolManagerScript;
 
-    public void SaveData(string fileName)
+    public string SaveData(string fileName)
     {
         dungeonData.floorPositions = toolManagerScript.floorPositions.ToList();
         dungeonData.straightUpDown_Left = toolManagerScript.straightUpDown_Left;
@@ -42,13 +42,14 @@ public class SavingDungeonData : MonoBehaviour
             dungeonData.straightLeftRight_Down.Count+" "+dungeonData.downLeftCorner.Count+" "+
             dungeonData.bentLeft.Count+" "+dungeonData.bentRight.Count);
 
-        string folderPath = Path.Combine(Application.persistentDataPath, fileName);
-        string filePath = Path.Combine(folderPath,"Dungeon Data.json");
+        string folderPath = Path.Combine(Application.persistentDataPath, "Dungeons");
+        string filePath = Path.Combine(folderPath,fileName+".json");
 
         string json = JsonUtility.ToJson(dungeonData,true);
         Directory.CreateDirectory(folderPath);
         File.WriteAllText(filePath,json);
 
-        Debug.Log("File saved at path : "+folderPath);
+        Debug.Log("File saved at path : "+filePath);
+        return folderPath;
     }
 }

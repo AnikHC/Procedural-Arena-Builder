@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -17,7 +18,7 @@ public class ToolManagerEditor : Editor
 
         if(GUILayout.Button("Save Dungeon Data"))
         {
-            generator.SaveDungeon();
+            generator.SaveDungeon("DungeonData");
         }
 
         if(GUILayout.Button("Load Dungeon Data"))

@@ -15,7 +15,7 @@ public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
     #region Overrides
     protected override void RunProceduralGeneration()
     {
-        GenerateRooms();
+        GenerateRooms(iterations,walkLength,startRandomlyEachIteration,generateWallAutomatically);
     }
     protected override void RunWallGenerations()
     {
@@ -24,9 +24,9 @@ public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
     #endregion
 
     #region Generation
-    protected void GenerateRooms()
+    public void GenerateRooms(int iterations, int walkLength, bool startRandomlyEachIteration,bool generateWallAutomatically)
     {   
-        floorPositions = RunRandomWalk(startingPosition);
+        floorPositions = RunRandomWalk(startingPosition, iterations,walkLength,startRandomlyEachIteration);
         SaveFloorPositions(floorPositions);
         tilemapVisualizer.ClearTiles();
         tilemapVisualizer.GenerateFloorTiles(floorPositions);
@@ -34,7 +34,7 @@ public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
         if(generateWallAutomatically) RunWallGenerations();
     }
 
-    protected HashSet<Vector2Int> RunRandomWalk(Vector2Int startingPosition)
+    protected HashSet<Vector2Int> RunRandomWalk(Vector2Int startingPosition, int iterations, int walkLength, bool startRandomlyEachIteration)
     {
         var currentPosition = startingPosition;
         HashSet<Vector2Int>  floorPositions = new();
@@ -46,6 +46,11 @@ public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
             if(startRandomlyEachIteration) currentPosition = floorPositions.ElementAt(Random.Range(0,floorPositions.Count));
         }
         return floorPositions;
+    }
+
+    internal void GenerateRooms(bool v, string text, bool startRandomlyEachIteration)
+    {
+        throw new NotImplementedException();
     }
     #endregion
 }

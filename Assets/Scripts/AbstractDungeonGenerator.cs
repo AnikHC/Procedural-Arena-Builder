@@ -9,7 +9,7 @@ public abstract class AbstractDungeonGenerator : MonoBehaviour
     [SerializeField] protected Vector2Int startingPosition = Vector2Int.zero;
     [SerializeField] protected TilemapVisualizer tilemapVisualizer = null;
     [SerializeField] protected new Camera camera;
-    [SerializeField] [Range(5,500)] private float cameraOrtho;
+    [Range(5,700)] public float cameraOrtho;
     public bool generateWallAutomatically = false;
     protected HashSet<Vector2Int> floorPositions;
 
@@ -27,17 +27,13 @@ public abstract class AbstractDungeonGenerator : MonoBehaviour
         ToolManagerScript.instance.ClearContainers();
         tilemapVisualizer.ClearTiles();
     }
-    public void ResetCamera()
-    {
-        cameraOrtho = 20;
-        camera.orthographicSize = 20;
-    }
     private void Update()
     {
         float scroll = Input.mouseScrollDelta.y;
 
         if (scroll != 0)
         {
+            cameraOrtho = camera.orthographicSize;
             cameraOrtho -= scroll ;
 
             cameraOrtho = Mathf.Clamp(cameraOrtho, 5, 500);

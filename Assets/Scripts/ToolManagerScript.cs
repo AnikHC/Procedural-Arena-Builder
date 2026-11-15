@@ -46,9 +46,10 @@ public class ToolManagerScript : MonoBehaviour
         bentRight = new();
     }
 
-    public void SaveDungeon()
+    public string SaveDungeon(string fileName)
     {
-        savingDungeonData.SaveData(folderName);
+        string filePath = savingDungeonData.SaveData(fileName);
+        return filePath;
     }
     public void LoadSavedData()
     {
