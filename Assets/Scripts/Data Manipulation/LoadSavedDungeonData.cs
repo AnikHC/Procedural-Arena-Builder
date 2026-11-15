@@ -22,6 +22,7 @@ public class LoadSavedDungeonData : MonoBehaviour
     [SerializeField] private Tilemap floorTileMap;
     [SerializeField] private TileBase floorTile;
     [SerializeField] private Tilemap wallTileMap;
+    [TextArea(3,5)] public string savedFileLocation;
     public TileBase straightUpDown_Left, straightUpDown_Right, straightLeftRight_Up, straightLeftRight_Down, downRightCorner, downLeftCorner, bentLeft, bentRight;
     public void GenerateFloorTiles(IEnumerable <Vector2Int> floorPositions)
     {
@@ -47,9 +48,9 @@ public class LoadSavedDungeonData : MonoBehaviour
     }
     #endregion
 
-    public void LoadData(string fileLocation)
+    public void LoadData()
     {
-        string json = File.ReadAllText(fileLocation);
+        string json = File.ReadAllText(savedFileLocation);
 
         dungeonDatas = JsonUtility.FromJson<DungeonDatas>(json);
         Debug.Log(dungeonDatas.floorPositions.Count+" "+dungeonDatas.straightUpDown_Left.Count+" "+

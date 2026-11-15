@@ -134,6 +134,7 @@ public class ButtonManagerScript : MonoBehaviour
         string w = walkLength.text;
         if(i=="") i = "70";
         if(w=="") w = "30";
+        ToolManagerScript.instance.ClearContainers();
         simpleRandomWalkDungeonGenerator.GenerateRooms(int.Parse(i),int.Parse(w),
             startRandomlyEachIteration,generateWallAutomatically);
     }
@@ -149,6 +150,7 @@ public class ButtonManagerScript : MonoBehaviour
         if(cl=="") cl = "10";
         if(cc=="") cc = "10";
         if(rp=="") rp = "99";
+        ToolManagerScript.instance.ClearContainers();
         corridorFirstDungeonGenerator.StartGenerationFromButton(int.Parse(i),int.Parse(w),
             startRandomlyEachIteration,generateWallAutomatically,int.Parse(cl),int.Parse(cc),int.Parse(rp));
     }
@@ -168,6 +170,7 @@ public class ButtonManagerScript : MonoBehaviour
         if(mrw=="") mrw = "20";
         if(mrh=="") mrh = "20";
         if(o=="") o = "3";
+        ToolManagerScript.instance.ClearContainers();
         roomFirstDungeonGenerator.StartGenerationFromButton(int.Parse(i),int.Parse(w),
             startRandomlyEachIteration,generateWallAutomatically,int.Parse(dw),int.Parse(dh),int.Parse(mrw),int.Parse(mrh),
                 useRandomWalkForRoomGenerations,int.Parse(o));

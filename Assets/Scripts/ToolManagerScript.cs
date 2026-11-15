@@ -53,6 +53,6 @@ public class ToolManagerScript : MonoBehaviour
     }
     public void LoadSavedData()
     {
-        loadSavedDungeonData.LoadData(savedFileLocation);
+        loadSavedDungeonData.LoadData();
     }
 }

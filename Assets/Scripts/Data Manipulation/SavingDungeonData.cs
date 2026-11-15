@@ -49,7 +49,7 @@ public class SavingDungeonData : MonoBehaviour
         Directory.CreateDirectory(folderPath);
         File.WriteAllText(filePath,json);
 
-        Debug.Log("File saved at path : "+filePath);
-        return folderPath;
+        Debug.Log("File saved at path : "+ Path.GetFullPath(filePath));
+        return Path.GetFullPath(folderPath);
     }
 }
